@@ -1,0 +1,31 @@
+@(todos: List[Todo], todoForm: Form[String])
+
+@import helper._
+
+@main("Todo list") {
+    
+    <h1>@todos.size Todo(s)</h1>
+    
+    <ul>
+        @todos.map { todo =>
+            <li>
+                @todo.text
+                
+                @form(routes.Application.deleteTodo(todo.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <h2>Add a new Todo</h2>
+    
+    @form(routes.Application.newTodo) {
+        
+        @inputText(todoForm("text")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}
